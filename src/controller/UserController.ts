@@ -38,7 +38,7 @@ export class UserController {
         user.role = role;
 
         // Validate
-        const errors = await validate(user);
+        const errors = await validate(user,{validationError:{target:false, value:false}});
         if(errors.length>0){
             return res.status(400).json(errors);
         }
@@ -74,7 +74,7 @@ export class UserController {
 
         
 
-        const errors = await validate(user);
+        const errors = await validate(user,{validationError:{target:false, value:false}});
         if(errors.length){
             return res.status(400).json(errors);
         }
