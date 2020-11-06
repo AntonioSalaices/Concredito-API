@@ -15,6 +15,12 @@ class AuthController{
         }catch(error){
             return res.status(400).json({message:'Username o password no encontrado!'});
         }
+        // Checar password
+        if(!user.checkPassword(password)){
+            return res.status(400).json({message:'Usuario o password son incorrectos'});
+        }else{
+
+        }
         res.send(user);
     };
 

@@ -45,6 +45,7 @@ export class UserController {
         // TODO HASH PASSWORD
         const userRepository = getRepository(User);
         try {
+            user.hashPassword();
             await userRepository.save(user);
         } catch (e) {
             return res.status(409).json({message: 'Username ya existe'});
