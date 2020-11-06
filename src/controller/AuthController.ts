@@ -27,7 +27,7 @@ class AuthController{
     };
 
     static changePassword = async (req: Request,res: Response) =>{
-        const {userId} = req.params;
+        const {userId} = res.locals.jwtPayload;
         const {oldPassword, newPassword} = req.body;
 
         if(!(oldPassword && newPassword)){
