@@ -1,13 +1,11 @@
 import {Router} from 'express';
 
-import auth from './auth';
-import user from './user';
+
+import prospecto from './prospecto';
 
 const routes =  Router();
 
-
-routes.use('/auth', auth);
-routes.use('/users', user);
+routes.use('/prospectos', prospecto);
 
 
 export default routes;
