@@ -1,10 +1,12 @@
 import {getRepository} from "typeorm";
 import {Request, Response} from "express";
 import {Prospecto} from "../entity/Prospecto";
-
+import * as fileUpload from "express-fileupload";
 import {validate} from 'class-validator';
 
+
 export class ProspectoController {
+
 
     // Servicio para obtener todos los prospectos
     static getAll = async (req:Request, res:Response)=>{
@@ -17,6 +19,7 @@ export class ProspectoController {
             res.status(404).json({message:'No hay prospectos registrados'});            
         }
     };
+    
 
     static getById = async (req:Request, res:Response)=>{
         const {id} = req.params;
@@ -30,45 +33,8 @@ export class ProspectoController {
         }
     };
 
-    static newProspecto = async (req:Request, res:Response)=>{
-        const {name, apellidop, apellidom, calle, numero,colonia, codigopostal, telefono, rfc, documento} = req.body;
-
-        console.log(req.body);
-
-        const prospecto = new Prospecto();
-
-        prospecto.name = name;
-        prospecto.apellidop = apellidop;
-        prospecto.apellidom = apellidom;
-        prospecto.calle = calle;
-        prospecto.numero = numero;
-        prospecto.colonia = colonia;
-        prospecto.codigopostal = codigopostal;
-        prospecto.telefono = telefono;
-        prospecto.rfc = rfc;
-        prospecto.documento = documento;
-        prospecto.estatus = "E";
-        prospecto.observacion = "";
-        console.log(prospecto);
-        // Validación
-        const errors = await validate(prospecto,{validationError:{target:false, value:false}});
-        if(errors.length>0){
-            return res.status(400).json(errors);
-        }
     
-        const prospectoRepository = getRepository(Prospecto);
-        try {
-            await prospectoRepository.save(prospecto);
-        } catch (e) {
-            return res.status(409).json({message: 'Prospecto ya existe'});
-        }
-
-        // Todo salió bien
-        res.send('Prospecto creado');
-
-
-        
-    };
+    
 
     static editProspecto = async (req:Request, res:Response)=>{
         let prospecto;

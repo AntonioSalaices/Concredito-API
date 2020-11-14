@@ -1,6 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, OneToMany} from "typeorm";
 import {IsNotEmpty} from 'class-validator';
-
 
 //TODO NECESITA VALIDACION DE RFC
 
@@ -47,7 +46,6 @@ export class Prospecto {
     rfc: string;
 
     @Column()
-    @IsNotEmpty()
     documento: string;
 
     @Column()
